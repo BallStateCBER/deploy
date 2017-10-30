@@ -50,8 +50,15 @@
     $slack = new Slack();
     $slack->addLine('*' . $triggerMsg . '*');
 
+    // Make sure site directory exists
+    $siteDir = __DIR__ . '/../../' . $site[$branch];
+    if (!file_exists($siteDir)) {
+        echo "$siteDir not found";
+        exit;
+    }
+
     // Change working directory to appropriate website
-    chdir (__DIR__ . '/../../' . $site[$branch]);
+    chdir($siteDir);
 
     // Run commands
     $commands = include __DIR__ . '/../config/commands.php';
