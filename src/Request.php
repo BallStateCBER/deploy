@@ -52,12 +52,14 @@ class Request
     public static function getDeployTrigger()
     {
         $branch = Request::getBranch();
+        $siteName = Request::getSiteName();
 
         if (empty($_POST)) {
             $ip = Request::getIpAddress();
             $allowedIps = include('../config/allowed_ip_addresses.php');
+            $requesterName = array_search($ip, $allowedIps);
 
-            return 'Deploy triggered manually by ' . array_search($ip, $allowedIps) . " for $branch branch";
+            return "Deploy triggered manually by $requesterName for $branch branch of $siteName";
         }
 
         $payload = Request::getPayload();
@@ -65,7 +67,7 @@ class Request
         $beforeSha = substr($payload->before, 0, 7);
         $afterSha = substr($payload->after, 0, 7);
 
-        return "Push from $pusher updated head SHA of $branch branch from $beforeSha to $afterSha";
+        return "Push from $pusher updated head SHA of $branch branch of $siteName from $beforeSha to $afterSha";
     }
 
     public static function getPayload()
