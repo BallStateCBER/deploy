@@ -56,7 +56,7 @@
     // Run commands
     $commands = include __DIR__ . '/../config/commands.php';
     foreach ($commands as $command) {
-        $results = shell_exec("$command 2>&1"); var_dump($results);
+        $results = shell_exec("$command 2>&1");
 
         $log->addLine("\$ $command");
         $log->addLine(trim($results));
