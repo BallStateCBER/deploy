@@ -3,14 +3,14 @@ class Site
 {
     public static function isValid($siteName)
     {
-        $sites = include('../config/sites.php');
+        $sites = include dirname(dirname(__FILE__)) . '/config/sites.php';
 
         return isset($sites[$siteName]);
     }
 
     public static function getSite($siteName)
     {
-        $sites = include('../config/sites.php');
+        $sites = include dirname(dirname(__FILE__)) . '/config/sites.php';
 
         return $sites[$siteName];
     }

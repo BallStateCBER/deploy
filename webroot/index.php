@@ -1,8 +1,9 @@
 <?php
     $title = '🤖 CBER Deploy-bot 🤖';
+    $appDir = dirname(dirname(__FILE__));
 
-    spl_autoload_register(function ($className) {
-        include '../src/' . $className . '.php';
+    spl_autoload_register(function ($className) use ($appDir) {
+        include $appDir . '/src/' . $className . '.php';
     });
 
     // Forbid unknown IP addresses
@@ -51,7 +52,8 @@
     $slack->addLine('*' . $triggerMsg . '*');
 
     // Make sure site directory exists
-    $siteDir = __DIR__ . '/../../' . $site[$branch];
+    $sitesRoot = dirname($appDir);
+    $siteDir = $sitesRoot . '/' . $site[$branch];
     if (!file_exists($siteDir)) {
         echo "$siteDir not found";
         exit;
@@ -61,7 +63,7 @@
     chdir($siteDir);
 
     // Run commands
-    $commands = include __DIR__ . '/../config/commands.php';
+    $commands = include $appDir . '/config/commands.php';
     foreach ($commands as $command) {
         $results = shell_exec("$command 2>&1");
 

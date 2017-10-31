@@ -56,7 +56,7 @@ class Request
 
         if (empty($_POST)) {
             $ip = Request::getIpAddress();
-            $allowedIps = include('../config/allowed_ip_addresses.php');
+            $allowedIps = include dirname(dirname(__FILE__)) . '/config/allowed_ip_addresses.php';
             $requesterName = array_search($ip, $allowedIps);
 
             return "Deploy triggered manually by $requesterName for $branch branch of $siteName";
@@ -81,7 +81,7 @@ class Request
 
     public static function isAuthorized()
     {
-        $allowedIps = include('../config/allowed_ip_addresses.php');
+        $allowedIps = include dirname(dirname(__FILE__)) . '/config/allowed_ip_addresses.php';
         $ip = $_SERVER['REMOTE_ADDR'];
         foreach ($allowedIps as $name => $allowedIp) {
             if (strpos($ip, $allowedIp) === 0) {

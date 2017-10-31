@@ -16,7 +16,7 @@ class Log
     public function write()
     {
         $siteName = Request::getSiteName();
-        $filename = "../logs/$siteName.log";
+        $filename = dirname(dirname(__FILE__)) . "/logs/$siteName.log";
         file_put_contents ($filename, $this->content, FILE_APPEND);
     }
 }

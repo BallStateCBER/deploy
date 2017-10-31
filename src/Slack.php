@@ -31,7 +31,7 @@ class Slack
             'icon_emoji' => ':robot_face:',
             'username' => 'CBER Deploy-bot'
         ]);
-        $url = include('../config/slack_webhook_url.php');
+        $url = include dirname(dirname(__FILE__)) . '/config/slack_webhook_url.php';
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
