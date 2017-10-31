@@ -89,23 +89,27 @@
         $screenOutput->add($slack->curlResult, 'red');
     }
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>
-        <?= $title ?>
-    </title>
-</head>
-<body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
-    <h1>
-        <?= $title ?>
-    </h1>
-    <strong>
-        <?= $triggerMsg ?>
-    </strong>
-    <pre>
-        <?= $screenOutput->content ?>
-    </pre>
-</body>
-</html>
+<?php if (empty($_POST)): ?>
+    <!DOCTYPE HTML>
+    <html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            <?= $title ?>
+        </title>
+    </head>
+    <body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
+        <h1>
+            <?= $title ?>
+        </h1>
+        <strong>
+            <?= $triggerMsg ?>
+        </strong>
+        <pre>
+            <?= $screenOutput->content ?>
+        </pre>
+    </body>
+    </html>
+<?php else: ?>
+    <?= $triggerMsg . "\n" . $screenOutput->content ?>
+<?php endif; ?>
