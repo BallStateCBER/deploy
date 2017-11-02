@@ -3,9 +3,11 @@
  * A list of all commands to run via shell_exec() for each deployment
  */
 
+$composer = 'php /home/okbvtfr/public_html/deploy/composer.phar';
+
 return [
     'git pull',
     'git status',
-    'php composer.phar self-update',
-    'php composer.phar install'
+    "$composer self-update",
+    "$composer install"
 ];
