@@ -12,7 +12,6 @@
             color: #FFFFFF;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-size: 18px;
-            font-weight: bold;
             padding: 0 10px;
         }
         a {
