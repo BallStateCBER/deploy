@@ -1,7 +1,9 @@
 <?php
+    ob_start();
+    $appDir = dirname(dirname(__FILE__));
     if (isset($_GET['site'])) {
         $siteName = $_GET['site'];
-        $path = dirname(dirname(__FILE__)) . '/logs/' . $siteName . '.html';
+        $path = $appDir . '/logs/' . $siteName . '.html';
         if (file_exists($path)) {
             include $path;
         } else {
@@ -10,3 +12,5 @@
     } else {
         echo 'No site name provided';
     }
+    $content = ob_get_clean();
+    include $appDir . '/src/View/layout.php';
