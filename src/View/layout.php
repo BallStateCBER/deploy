@@ -24,6 +24,13 @@
             color: #327eb8;
             text-decoration: underline;
         }
+        h1 a {
+            color: #fff;
+        }
+        h1 a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
         .table > thead > tr > th,
         .table > tbody > tr > th,
         .table > tfoot > tr > th,
@@ -43,7 +50,9 @@
 </head>
 <body>
     <h1>
-        <?= $title ?>
+        <a href="/">
+            <?= $title ?>
+        </a>
     </h1>
     <?= $content ?>
 </body>
