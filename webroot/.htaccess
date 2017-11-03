@@ -3,6 +3,7 @@ RewriteBase /
 RewriteCond %{REQUEST_URI} !index\.php [NC]
 RewriteCond %{REQUEST_URI} !phpinfo\.php [NC]
 RewriteCond %{REQUEST_URI} !check\.php [NC]
+RewriteCond %{REQUEST_URI} !log\.php [NC]
 RewriteRule ^([^/]+)(.*)?$ index.php?path=$1$2   [L]
 
 # php -- BEGIN cPanel-generated handler, do not edit
