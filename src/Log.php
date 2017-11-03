@@ -7,12 +7,12 @@ class Log
     public function __construct()
     {
         $this->entryId = date('YmdHis');
-        $this->addLine('<h1 id="' . $this->entryId . '">####### ' . date('Y-m-d H:i:s') . " #######</h1>\n");
+        $this->content .= '<h1 id="' . $this->entryId . '">####### ' . date('Y-m-d H:i:s') . " #######</h1>\n";
     }
 
     public function addLine($line)
     {
-        $this->content .= $line . "<br />\n";
+        $this->content .= nl2br($line) . "<br />\n";
     }
 
     public function write()

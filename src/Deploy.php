@@ -49,6 +49,7 @@ class Deploy
         // Initialize various output
         $log = new Log();
         $log->addLine($this->triggerMsg);
+        $log->addLine('');
         $this->screenOutput = new ScreenOutput();
         $slack = new Slack();
         $slack->addLine('*' . $this->triggerMsg . '*');
@@ -69,8 +70,9 @@ class Deploy
         foreach ($commands as $command) {
             $results = shell_exec("$command 2>&1");
 
-            $log->addLine("\$ $command");
+            $log->addLine("<strong>\$ $command</strong>");
             $log->addLine(trim($results));
+            $log->addLine('');
 
             $this->screenOutput->add('$ ', '#6BE234');
             $this->screenOutput->add($command . "\n", '#729FCF');
