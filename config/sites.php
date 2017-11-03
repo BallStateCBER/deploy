@@ -6,7 +6,7 @@
 
 return [
     'tax-calculator' => [
-        'development' => 'tax_calculator_cloned',
+        'development' => 'tax_calculator_staging',
         'master' => 'tax_calculator'
     ]
 ];
