@@ -1,12 +1,21 @@
+<?php ob_start(); ?>
+
+<table class="table"><tr><th>Repo</th><th>Branches</th></tr>
+    <?php foreach ($sites as $site => $branches): ?>
+        <tr>
+            <td>
+                <?= $site ?>
+            </td>
+            <td>
+                <?php foreach ($branches as $branch => $dir): ?>
+                    <a href="/<?= $site ?>/<?= $branch ?>">
+                        <?= $branch ?>
+                    </a>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
 <?php
-    $content = '<ul>';
-    foreach ($sites as $site => $branches) {
-        $content .= '<li>' . $site . ': ';
-        $links = [];
-        foreach ($branches as $branch => $dir) {
-            $links[] = '<a href="/' . $site . '/' . $branch . '">' . $branch . '</a>';
-        }
-        $content .= implode(', ', $links) . '</li>';
-    }
-    $content .= '</ul>';
-    return $content;
+    return ob_get_clean();

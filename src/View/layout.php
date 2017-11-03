@@ -24,6 +24,21 @@
             color: #327eb8;
             text-decoration: underline;
         }
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+        .table > thead > tr > th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
     </style>
 </head>
 <body>
