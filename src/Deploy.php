@@ -82,13 +82,15 @@ class Deploy
             $slack->addLine("*\$ $command*");
             $slack->addLine(str_replace("\n", "\n>", "\n" . trim($results)));
         }
+        $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $siteName . '#' . $log->entryId;
+        $slack->addLine('Log: ' . $logUrl);
 
         // Write to log
         $log->addLine('');
         $log->write();
 
         // Send a message to Slack
-        if (true || $slack->send()) {
+        if ($slack->send()) {
             $this->screenOutput->add("Sent message to Slack");
         } else {
             $this->screenOutput->add('Error sending message to Slack: ');
