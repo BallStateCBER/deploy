@@ -78,9 +78,7 @@ class Deploy
             $this->screenOutput->add($command . "\n", '#729FCF');
             $this->screenOutput->add(htmlentities(trim($results)) . "\n\n");
 
-            // Format Slack message with command results in blockquote
-            $slack->addLine("*\$ $command*");
-            $slack->addLine(str_replace("\n", "\n>", "\n" . trim($results)));
+            $slack->addAbridged($command, $results);
         }
         $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $siteName . '#' . $log->entryId;
         $slack->addLine('Log: ' . $logUrl);
