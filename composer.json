@@ -1,0 +1,10 @@
+{
+  "name": "ballstatecber/deploy",
+  "description": "CBER Deploy-bot",
+  "homepage": "http://deploy.cberdata.org",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.1"
+  }
+}
