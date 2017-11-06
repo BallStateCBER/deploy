@@ -5,6 +5,10 @@
  */
 
 return [
+    'datacenter_home' => [
+        'development' => 'data_center_home_staging',
+        'master' => 'data_center_home'
+    ],
     'deploy' => [
         'master' => 'deploy'
     ],
