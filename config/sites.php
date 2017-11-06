@@ -5,6 +5,9 @@
  */
 
 return [
+    'deploy' => [
+        'master' => 'deploy'
+    ],
     'tax-calculator' => [
         'development' => 'tax_calculator_staging',
         'master' => 'tax_calculator'
