@@ -46,6 +46,7 @@
             border-bottom: 2px solid #ddd;
         }
     </style>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <h1>
