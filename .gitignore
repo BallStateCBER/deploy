@@ -1,5 +1,5 @@
 .idea/*
-logs/*.log
+logs/*
 config/slack_webhook_url.php
 config/allowed_ip_addresses.php
 vendor/*
