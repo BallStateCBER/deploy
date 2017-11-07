@@ -4,6 +4,9 @@ class Deploy
     public $triggerMsg;
     public $screenOutput;
 
+    /**
+     * Deploy constructor
+     */
     public function __construct()
     {
         $appDir = dirname(dirname(__FILE__));

@@ -3,6 +3,9 @@ class ScreenOutput
 {
     public $content;
 
+    /**
+     * ScreenOutput constructor
+     */
     public function __construct()
     {
         $this->content .= "\n";
@@ -11,8 +14,9 @@ class ScreenOutput
     /**
      * Appends text to $this->content and (if this isn't a POST request) styles it in the (optional) specified color
      *
-     * @param $content
-     * @param null $color
+     * @param string $content Content to be added
+     * @param null|string $color Optional color for content
+     * @return void
      */
     public function add($content, $color = null)
     {

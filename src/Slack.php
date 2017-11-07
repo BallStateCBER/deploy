@@ -4,11 +4,22 @@ class Slack
     public $content;
     public $curlResult;
 
+    /**
+     * Adds $line and a newline to the message being built
+     *
+     * @param string $line Line of text to add
+     * @return void
+     */
     public function addLine($line)
     {
         $this->content .= $line . "\n";
     }
 
+    /**
+     * Transforms special characters in the current message to make them Slack-friendly
+     *
+     * @return void
+     */
     public function encodeContent()
     {
         $this->content = str_replace(
@@ -22,6 +33,11 @@ class Slack
         );
     }
 
+    /**
+     * Sends a message to Slack
+     *
+     * @return bool
+     */
     public function send()
     {
         $this->encodeContent();
@@ -42,6 +58,13 @@ class Slack
         return $this->curlResult == 'ok';
     }
 
+    /**
+     * Adds the results of a command to the current message in an abbreviated way
+     *
+     * @param string $command Command being run
+     * @param string $results Results of command
+     * @return void
+     */
     public function addAbridged($command, $results)
     {
         if ($command == 'git pull') {

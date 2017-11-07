@@ -1,11 +1,21 @@
 <?php
 class Request
 {
+    /**
+     * Returns the IP address making the current request
+     *
+     * @return string
+     */
     public static function getIpAddress()
     {
         return $_SERVER['REMOTE_ADDR'];
     }
 
+    /**
+     * Returns the name of the GitHub repository associated with the current request
+     *
+     * @return string|bool
+     */
     public static function getSiteName()
     {
         if (isset($_POST['payload'])) {
@@ -24,11 +34,21 @@ class Request
         return false;
     }
 
+    /**
+     * Returns whether or not the current request is a GitHub ping event
+     *
+     * @return bool
+     */
     public static function isGithubPing()
     {
         return isset($_SERVER['HTTP_X_GITHUB_EVENT']) && $_SERVER['HTTP_X_GITHUB_EVENT'] == 'ping';
     }
 
+    /**
+     * Returns the name of the branch associated with the current request
+     *
+     * @return string|bool
+     */
     public static function getBranch()
     {
         $siteName = Request::getSiteName();
@@ -49,6 +69,11 @@ class Request
         return false;
     }
 
+    /**
+     * Returns a string describing what caused this deployment to happen
+     *
+     * @return string
+     */
     public static function getDeployTrigger()
     {
         $branch = Request::getBranch();
@@ -70,6 +95,11 @@ class Request
         return "Push from $pusher updated head SHA of $branch branch of $siteName from $beforeSha to $afterSha";
     }
 
+    /**
+     * Returns the decoded payload sent by a GitHub webhook
+     *
+     * @return mixed|stdClass
+     */
     public static function getPayload()
     {
         if (isset($_POST['payload'])) {
@@ -79,6 +109,11 @@ class Request
         return new stdClass();
     }
 
+    /**
+     * Returns whether or not the current request was made by an IP address in allowed_ip_addresses.php
+     *
+     * @return bool
+     */
     public static function isAuthorized()
     {
         $allowedIps = include dirname(dirname(__FILE__)) . '/config/allowed_ip_addresses.php';
