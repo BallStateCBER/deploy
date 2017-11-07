@@ -51,7 +51,7 @@ class Slack
                 'changed'
             ];
             foreach ($keyStrings as $keyString) {
-                $this->addLinesWithString($results, $keyString, 'Git: ');
+                $this->addLinesWithString($results, $keyString, '*Git:* ');
             }
 
             return;
@@ -63,7 +63,7 @@ class Slack
                 'Updating'
             ];
             foreach ($keyStrings as $keyString) {
-                $this->addLinesWithString($results, $keyString, 'Composer: ');
+                $this->addLinesWithString($results, $keyString, '*Composer:* ');
             }
         }
     }
