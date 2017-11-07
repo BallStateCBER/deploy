@@ -19,5 +19,9 @@ return [
     'tax-calculator' => [
         'development' => 'tax_calculator_staging',
         'master' => 'tax_calculator'
+    ],
+    'whyarewehere' => [
+        'development' => 'student_work_staging',
+        'master' => 'student_work'
     ]
 ];
