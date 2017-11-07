@@ -5,6 +5,10 @@
  */
 
 return [
+    'cri' => [
+        'development' => 'cri_staging',
+        'master' => 'cri'
+    ],
     'datacenter_home' => [
         'development' => 'data_center_home_staging',
         'master' => 'data_center_home'
