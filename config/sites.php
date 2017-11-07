@@ -12,6 +12,10 @@ return [
     'deploy' => [
         'master' => 'deploy'
     ],
+    'muncie_events' => [
+        'development' => 'muncie_events2_staging',
+        'master' => 'muncie_events2'
+    ],
     'tax-calculator' => [
         'development' => 'tax_calculator_staging',
         'master' => 'tax_calculator'
