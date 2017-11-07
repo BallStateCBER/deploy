@@ -84,26 +84,51 @@ class Slack
 
         foreach (explode("\n", $message) as $line) {
             if (stripos($line, $search) !== false) {
-                $line = $this->removeDownloading($line);
+                $line = $this->trimDetails($line);
                 $this->addLine($prefix . trim($line));
             }
         }
     }
 
     /**
-     * Removes the repetitive "Downloading (0%)Downloading (10%)Downloading (20%)..." strings from $msg
+     * Removes unnecessary details from Composer output messages
      *
      * @param string $msg Message
      * @return string
      */
-    public function removeDownloading($msg)
+    public function trimDetails($msg)
     {
-        while (stripos($msg, 'Downloading') !== false && stripos($msg, ')') !== false) {
+        // Remove leading "- "
+        if (substr($msg, 0, 2) == '- ') {
+            $msg = substr($msg, 2);
+        }
+
+        // Remove "(Downloading X%)"
+        while (stripos($msg, 'Downloading') !== false) {
             $start = stripos($msg, 'Downloading');
-            $end = stripos($msg, ')');
+            $end = stripos($msg, ')', $start);
+            if ($end === false) {
+                break;
+            }
             $substr = substr($msg, $start, $end - $start);
             $msg = str_replace($substr, '', $msg);
         }
+
+        // Remove "Checking out..."
+        $checkingOut = strpos($msg, ': Checking out');
+        if ($checkingOut !== false) {
+            $msg = substr($msg, 0, $checkingOut);
+        }
+
+        // Remove other strings
+        $removeStrings = [
+            ': Loading from cache'
+        ];
+        foreach ($removeStrings as $removeString) {
+            $msg = str_replace($removeString, '', $msg);
+        }
+
+        $msg = trim($msg);
 
         return $msg;
     }
