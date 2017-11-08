@@ -70,8 +70,8 @@ class Slack
         if ($command == 'git pull') {
             $keyStrings = [
                 'Already up-to-date',
-                'changed',
-                'error',
+                ' changed,',
+                'error:',
                 'Fast-froward'
             ];
             foreach ($keyStrings as $keyString) {
