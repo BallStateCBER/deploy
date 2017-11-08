@@ -155,4 +155,27 @@ class Slack
 
         return $msg;
     }
+
+    /**
+     * Adds a message explaining what triggered this deployment, with the important bit bolded
+     *
+     * @param string $msg Message to add
+     * @return void
+     */
+    public function addTriggerMsg($msg)
+    {
+        $msg = '*' . $msg;
+
+        if (strpos($msg, 'Push from') === 0) {
+            $pos = strpos($msg, ' updated ');
+            $msg = substr($msg, 0, $pos) . '*' . substr($msg, $pos);
+        } elseif (strpos($msg, 'Deploy triggered manually') === 0) {
+            $pos = strpos($msg, ' for ');
+            $msg = substr($msg, 0, $pos) . '*' . substr($msg, $pos);
+        } else {
+            $msg .= '*';
+        }
+
+        $this->addLine($msg);
+    }
 }

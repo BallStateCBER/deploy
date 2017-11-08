@@ -55,7 +55,7 @@ class Deploy
         $log->addLine('');
         $this->screenOutput = new ScreenOutput();
         $slack = new Slack();
-        $slack->addLine('*' . $this->triggerMsg . '*');
+        $slack->addTriggerMsg($this->triggerMsg);
 
         // Make sure site directory exists
         $sitesRoot = dirname($appDir);
