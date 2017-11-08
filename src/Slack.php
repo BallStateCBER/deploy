@@ -70,8 +70,9 @@ class Slack
         if ($command == 'git pull') {
             $keyStrings = [
                 'Already up-to-date',
+                'changed',
                 'error',
-                'changed'
+                'Fast-froward'
             ];
             foreach ($keyStrings as $keyString) {
                 $this->addLinesWithString($results, $keyString, '*Git:* ');
