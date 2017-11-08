@@ -84,7 +84,7 @@ class Deploy
             $slack->addAbridged($command, $results);
         }
         $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $siteName . '#' . $log->entryId;
-        $slack->addLine('Log: ' . $logUrl);
+        $slack->addLine('*Log:* ' . $logUrl);
 
         // Write to log
         $log->addLine('');
