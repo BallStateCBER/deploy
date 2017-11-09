@@ -165,16 +165,12 @@ class Slack
      */
     public function addTriggerMsg($msg)
     {
-        $msg = '*' . $msg;
-
         if (strpos($msg, 'Push from') === 0) {
             $pos = strpos($msg, ' updated ');
-            $msg = substr($msg, 0, $pos) . '*' . substr($msg, $pos);
+            $msg = '*' . substr($msg, 0, $pos) . '*' . substr($msg, $pos);
         } elseif (strpos($msg, 'Deploy triggered manually') === 0) {
             $pos = strpos($msg, ' for ');
-            $msg = substr($msg, 0, $pos) . '*' . substr($msg, $pos);
-        } else {
-            $msg .= '*';
+            $msg = '*' . substr($msg, 0, $pos) . '*' . substr($msg, $pos);
         }
 
         $this->addLine($msg);
