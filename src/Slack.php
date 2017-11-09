@@ -72,7 +72,7 @@ class Slack
                 'Already up-to-date',
                 ' changed,',
                 'error:',
-                'Fast-froward'
+                'Fast-forward'
             ];
             foreach ($keyStrings as $keyString) {
                 $this->addLinesWithString($results, $keyString, '*Git:* ');
