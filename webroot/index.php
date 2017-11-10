@@ -6,15 +6,15 @@
 
     if (empty($_POST) && empty($_GET)) {
         $sites = Site::getSites();
-        $content = include $appDir . '/src/View/home.php';
-        include $appDir . '/src/View/layout.php';
+        $content = include $appDir . '/src/View/home.php.template';
+        include $appDir . '/src/View/layout.php.template';
     } else {
         $deploy = new Deploy();
         if (empty($_POST)) {
             $content =
                 '<strong>' . $deploy->triggerMsg . '</strong>' .
                 '<pre>' . $deploy->screenOutput->content . '</pre>';
-            include $appDir . '/src/View/layout.php';
+            include $appDir . '/src/View/layout.php.template';
         } else {
             echo $deploy->triggerMsg . "\n" . $deploy->screenOutput->content;
         }
