@@ -34,6 +34,6 @@ class Log
         $this->content .= '<hr />';
         $siteName = Request::getSiteName();
         $filename = dirname(dirname(__FILE__)) . "/logs/$siteName.html";
-        file_put_contents ($filename, $this->content, FILE_APPEND);
+        file_put_contents($filename, $this->content, FILE_APPEND);
     }
 }

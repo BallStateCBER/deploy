@@ -60,9 +60,11 @@ class Request
                 echo 'No branch specified. Branches that can be auto-deployed: ' . implode(', ', $availableBranches);
                 exit;
             }
+
             return explode('/', $_GET['path'])[1];
         } elseif (isset($_POST['payload'])) {
             $payload = json_decode($_POST['payload']);
+
             return explode('/', $payload->ref)[2];
         }
 
