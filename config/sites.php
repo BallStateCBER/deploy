@@ -20,6 +20,9 @@ return [
         'development' => 'muncie_events_staging',
         'master' => 'muncie_events'
     ],
+    'muncie_events3' => [
+        'master' => 'muncie_events_cakephp3'
+    ],
     'tax-calculator' => [
         'development' => 'tax_calculator_staging',
         'master' => 'tax_calculator'
