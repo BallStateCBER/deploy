@@ -136,7 +136,7 @@ class Slack
             if ($end === false) {
                 break;
             }
-            $substr = substr($msg, $start, $end - $start);
+            $substr = substr($msg, $start, $end - $start + 1);
             $msg = str_replace($substr, '', $msg);
         }
 
