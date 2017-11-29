@@ -86,7 +86,8 @@ class Slack
         if (strpos($command, 'composer.phar install') !== false) {
             $keyStrings = [
                 'Nothing to install or update',
-                'Updating'
+                'Updating',
+                'Installing'
             ];
             foreach ($keyStrings as $keyString) {
                 $this->addLinesWithString($results, $keyString, '*Composer:* ');
