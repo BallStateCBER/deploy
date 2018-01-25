@@ -21,6 +21,7 @@ return [
         'master' => 'muncie_events'
     ],
     'muncie_events3' => [
+        'development' => 'muncie_events_cakephp3_staging',
         'master' => 'muncie_events_cakephp3'
     ],
     'muncie-events-api' => [
