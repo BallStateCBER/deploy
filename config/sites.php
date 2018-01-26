@@ -16,10 +16,6 @@ return [
     'deploy' => [
         'master' => 'deploy'
     ],
-    'muncie_events' => [
-        'development' => 'muncie_events_staging',
-        'master' => 'muncie_events'
-    ],
     'muncie_events3' => [
         'development' => 'muncie_events_cakephp3_staging',
         'master' => 'muncie_events_cakephp3'
