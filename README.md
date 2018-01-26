@@ -8,6 +8,7 @@ websites developed by the Ball State University Center for Business and Economic
 - Clone site twice (production and staging)  
 	`git clone -b master (repo) (dirname)`  
 	`git clone -b development (repo) (dirname_staging)`
+- Run `composer install` in both directories
 - Upload `.env.production` and rename to `.env`
 - Create staging.(domain) subdirectory pointed at (dirname_staging)
 - Add site to deploy app's sites.php
