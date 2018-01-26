@@ -13,4 +13,4 @@ websites developed by the Ball State University Center for Business and Economic
 - Add site to deploy app's sites.php
 - Set up webhook in GitHub  
     `https://deploy.cberdata.org/`
-- Protect master branch in GitHub
+- Optional: Protect master branch in GitHub
