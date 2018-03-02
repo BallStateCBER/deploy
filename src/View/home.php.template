@@ -23,7 +23,20 @@
                 </td>
                 <td>
                     <?php foreach ($branches as $branch => $dir): ?>
-                        <a href="/<?= $site ?>/<?= $branch ?>"><?= $branch ?></a>
+                        <?php
+                            try {
+                                if (\App\Git::canPull($site, $branch)) {
+                                    echo "<a href=\"/$site/$branch\">$branch</a>";
+                                } else {
+                                    echo '<span class="pull-unavailable" ' .
+                                        'title="Cannot pull: Modified files or dir missing">' . $branch . ' 🚫</span>';
+                                }
+                            } catch (Exception $e) {
+                                echo '<span class="pull-unavailable" ' .
+                                    'title="Exception: ' . $e->getMessage() . '">' . $branch . ' ⚠</span>';
+                            }
+
+                        ?>
                         <br />
                     <?php endforeach; ?>
                 </td>
