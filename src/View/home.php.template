@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 
 <p>
-    Click a branch name to deploy to that branch.
+    Click a branch name to deploy from development to the staging site or from master to the production site.
 </p>
 
 <table class="table">
@@ -21,9 +21,8 @@
                 </td>
                 <td>
                     <?php foreach ($branches as $branch => $dir): ?>
-                        <a href="/<?= $site ?>/<?= $branch ?>">
-                            <?= $branch ?>
-                        </a>
+                        <a href="/<?= $site ?>/<?= $branch ?>"><?= $branch ?></a>
+                        <br />
                     <?php endforeach; ?>
                 </td>
                 <td>
