@@ -1,5 +1,9 @@
 <?php ob_start(); ?>
 
+<p>
+    Click a branch name to deploy to that branch.
+</p>
+
 <table class="table">
     <thead>
         <tr>
