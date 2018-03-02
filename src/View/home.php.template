@@ -17,7 +17,9 @@
         <?php foreach ($sites as $site => $branches): ?>
             <tr>
                 <td>
-                    <?= $site ?>
+                    <a href="https://github.com/BallStateCBER/<?= $site ?>">
+                        <?= $site ?>
+                    </a>
                 </td>
                 <td>
                     <?php foreach ($branches as $branch => $dir): ?>
