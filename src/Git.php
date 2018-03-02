@@ -23,13 +23,13 @@ class Git
         // Make sure site directory exists
         $appDir = dirname(dirname(__FILE__));
         $sitesRoot = dirname($appDir);
-        $siteDir = $sitesRoot . '/' . $site[$branch];
+        $siteDir = $sitesRoot . '/' . $site[$branch]['dir'];
         if (!file_exists($siteDir)) {
             return false;
         }
 
         $sitesRoot = dirname($appDir);
-        $siteDir = $sitesRoot . '/' . $site[$branch];
+        $siteDir = $sitesRoot . '/' . $site[$branch]['dir'];
 
         // Change working directory to appropriate website
         chdir($siteDir);

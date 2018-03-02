@@ -6,38 +6,89 @@
 
 return [
     'cri' => [
-        'development' => 'cri_staging',
-        'master' => 'cri'
+        'development' => [
+            'dir' => 'cri_staging',
+            'url' => 'https://staging.cri.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'cri',
+            'url' => 'https://cri.cberdata.org'
+        ]
     ],
     'datacenter_home' => [
-        'development' => 'data_center_home_staging',
-        'master' => 'data_center_home'
+        'development' => [
+            'dir' => 'data_center_home_staging',
+            'url' => 'https://staging.home.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'data_center_home',
+            'url' => 'https://cberdata.org'
+        ]
     ],
     'deploy' => [
-        'master' => 'deploy'
+        'master' => [
+            'dir' => 'deploy',
+            'url' => 'https://deploy.cberdata.org'
+        ]
     ],
     'muncie_events' => [
-        'development' => 'muncie_events_staging',
-        'master' => 'muncie_events'
+        'development' => [
+            'dir' => 'muncie_events_staging',
+            'url' => 'https://staging.muncieevents.com'
+        ],
+        'master' => [
+            'dir' => 'muncie_events',
+            'url' => 'https://muncieevents.com'
+        ]
     ],
     'muncie_events3' => [
-        'development' => 'muncie_events_cakephp3_staging',
-        'master' => 'muncie_events_cakephp3'
+        'development' => [
+            'dir' => 'muncie_events_cakephp3_staging',
+            'url' => 'https://staging.cake3.muncieevents.com'
+        ],
+        'master' => [
+            'dir' => 'muncie_events_cakephp3',
+            'url' => 'https://cake3.muncieevents.com'
+        ]
     ],
     'muncie-events-api' => [
-        'development' => 'muncie_events_api_staging',
-        'master' => 'muncie_events_api'
+        'development' => [
+            'dir' => 'muncie_events_api_staging',
+            'url' => 'https://staging.api.muncieevents.com'
+        ],
+        'master' => [
+            'dir' => 'muncie_events_api',
+            'url' => 'https://api.muncieevents.com'
+        ]
     ],
     'projects-cakephp3' => [
-        'development' => 'projects_staging',
-        'master' => 'projects'
+        'development' => [
+            'dir' => 'projects_staging',
+            'url' => 'https://staging.projects3.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'projects',
+            'url' => 'https://projects.cberdata.org'
+        ]
     ],
     'tax-calculator' => [
-        'development' => 'tax_calculator_staging',
-        'master' => 'tax_calculator'
+        'development' => [
+            'dir' => 'tax_calculator_staging',
+            'url' => 'https://staging.tax-comparison.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'tax_calculator',
+            'url' => 'https://tax-comparison.cberdata.org'
+        ]
     ],
     'whyarewehere' => [
-        'development' => 'student_work_staging',
-        'master' => 'student_work'
+        'development' => [
+            'dir' => 'student_work_staging',
+            'url' => 'https://staging.studentwork.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'student_work',
+            'url' => 'https://studentwork.cberdata.org'
+        ]
     ]
 ];

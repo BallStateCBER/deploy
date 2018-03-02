@@ -10,6 +10,7 @@
         <tr>
             <th>Repo</th>
             <th>Branches</th>
+            <th>Sites</th>
             <th>Logs</th>
         </tr>
     </thead>
@@ -22,7 +23,7 @@
                     </a>
                 </td>
                 <td>
-                    <?php foreach ($branches as $branch => $dir): ?>
+                    <?php foreach ($branches as $branch => $info): ?>
                         <?php
                             try {
                                 if (\App\Git::canPull($site, $branch)) {
@@ -35,8 +36,13 @@
                                 echo '<span class="pull-unavailable" ' .
                                     'title="Exception: ' . $e->getMessage() . '">' . $branch . ' ⚠</span>';
                             }
-
                         ?>
+                        <br />
+                    <?php endforeach; ?>
+                </td>
+                <td>
+                    <?php foreach ($branches as $branch => $info): ?>
+                        <a href="<?= $info['url'] ?>"><?= str_replace('https://', '', $info['url']) ?></a>
                         <br />
                     <?php endforeach; ?>
                 </td>

@@ -61,7 +61,7 @@ class Deploy
 
         // Make sure site directory exists
         $sitesRoot = dirname($appDir);
-        $siteDir = $sitesRoot . '/' . $site[$branch];
+        $siteDir = $sitesRoot . '/' . $site[$branch]['dir'];
         if (!file_exists($siteDir)) {
             echo "$siteDir not found";
             exit;
