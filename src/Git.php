@@ -37,6 +37,6 @@ class Git
         // Check to see if status mentions modified files
         $results = shell_exec('git status');
 
-        return stripos($results, 'modified: ');
+        return !stripos($results, 'modified: ');
     }
 }
