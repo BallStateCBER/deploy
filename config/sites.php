@@ -5,6 +5,12 @@
  */
 
 return [
+    'commentaries_cake3' => [
+        'master' => [
+            'dir' => 'commentaries',
+            'url' => 'https://cake3.commentaries.cberdata.org'
+        ]
+    ],
     'cri' => [
         'development' => [
             'dir' => 'cri_staging',
