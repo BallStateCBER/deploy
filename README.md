@@ -10,7 +10,7 @@ websites developed by the Ball State University Center for Business and Economic
 	`git clone -b development (repo) (dirname_staging)`
 - Run `composer install` in both directories
 - Upload `.env.production` and rename to `.env`
-- Create staging.(domain) subdirectory pointed at (dirname_staging)
+- Create staging.(domain) subdomain pointed at (dirname_staging)
 - Add site to deploy app's sites.php
 - Set up webhook in GitHub  
     `https://deploy.cberdata.org/`
