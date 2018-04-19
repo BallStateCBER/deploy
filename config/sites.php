@@ -5,7 +5,7 @@
  */
 
 return [
-    'commentaries_cake3' => [
+    'commentaries-cake3' => [
         'master' => [
             'dir' => 'commentaries',
             'url' => 'https://cake3.commentaries.cberdata.org'
@@ -21,7 +21,7 @@ return [
             'url' => 'https://cri.cberdata.org'
         ]
     ],
-    'datacenter_home' => [
+    'datacenter-home' => [
         'development' => [
             'dir' => 'data_center_home_staging',
             'url' => 'https://staging.home.cberdata.org'
@@ -37,7 +37,7 @@ return [
             'url' => 'https://deploy.cberdata.org'
         ]
     ],
-    'muncie_events' => [
+    'muncie-events' => [
         'development' => [
             'dir' => 'muncie_events_staging',
             'url' => 'https://staging.muncieevents.com'
@@ -47,7 +47,7 @@ return [
             'url' => 'https://muncieevents.com'
         ]
     ],
-    'muncie_events3' => [
+    'muncie-events3' => [
         'development' => [
             'dir' => 'muncie_events_cakephp3_staging',
             'url' => 'https://staging.cake3.muncieevents.com'
