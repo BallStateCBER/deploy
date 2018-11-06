@@ -77,6 +77,12 @@ return [
             'url' => 'https://projects.cberdata.org'
         ]
     ],
+    'school-rankings' => [
+        'master' => [
+            'dir' => 'school',
+            'url' => 'https://school.cberdata.org'
+        ]
+    ],
     'tax-calculator' => [
         'development' => [
             'dir' => 'tax_calculator_staging',
