@@ -81,6 +81,10 @@ return [
         'master' => [
             'dir' => 'school',
             'url' => 'https://school.cberdata.org'
+        ],
+        'commands' => [
+            'npm install',
+            'npm run build'
         ]
     ],
     'tax-calculator' => [
