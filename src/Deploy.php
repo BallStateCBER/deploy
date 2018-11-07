@@ -72,6 +72,9 @@ class Deploy
 
         // Run commands
         $commands = include $appDir . '/config/commands.php';
+        if (isset($site['commands'])) {
+            $commands = array_merge($commands, $site['commands']);
+        }
         foreach ($commands as $command) {
             $results = shell_exec("$command 2>&1");
 

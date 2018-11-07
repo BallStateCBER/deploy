@@ -61,6 +61,10 @@ class Site
      */
     public static function getAvailableBranches($site)
     {
+        if (isset($site['commands'])) {
+            unset($site['commands']);
+        }
+
         return array_keys($site);
     }
 }
