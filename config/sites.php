@@ -1,7 +1,21 @@
 <?php
 /**
- * A list of sites that are eligible for automatic deployment,
- * with the names of the subdirectories of public_html that correspond to each auto-deployable branch.
+ * Information about sites that are eligible for automatic deployment
+ *
+ * Format:
+ * [
+ *      'repo-name' => [
+ *          'branch-name' => [
+ *              'dir' => 'corresponding subdirectory of public_html'
+ *              'url' => 'URL for corresponding production/staging site'
+ *          ],
+ *          ...
+ *          'commands' => [
+ *              'command', // e.g. 'gulp less'
+ *              ...
+ *          ]
+ *      ]
+ * ]
  */
 
 return [
