@@ -1,6 +1,9 @@
 <?php
 namespace App;
 
+use Exception;
+use stdClass;
+
 class Request
 {
     /**
@@ -114,9 +117,10 @@ class Request
     }
 
     /**
-     * Returns whether or not the current request was made by an IP address in allowed_ip_addresses.php
+     * Returns whether or not the current request was made by an authorized IP address
      *
      * @return bool
+     * @throws Exception
      */
     public static function isAuthorized()
     {
@@ -124,6 +128,63 @@ class Request
         $ip = $_SERVER['REMOTE_ADDR'];
         foreach ($allowedIps as $name => $allowedIp) {
             if (strpos($ip, $allowedIp) === 0) {
+                return true;
+            }
+        }
+
+        if (self::isGitHub()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns TRUE if $ip is found within $range
+     *
+     * Originally posted on https://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php-5
+     *
+     * @param string $ip IP address
+     * @param string $range IP address range in CIDR notation
+     * @return bool
+     */
+    public static function cidrMatch($ip, $range)
+    {
+        list ($subnet, $bits) = explode('/', $range);
+        if ($bits === null) {
+            $bits = 32;
+        }
+        $ip = ip2long($ip);
+        $subnet = ip2long($subnet);
+        $mask = -1 << (32 - $bits);
+        $subnet &= $mask; // nb: in case the supplied subnet wasn't correctly aligned
+
+        return ($ip & $mask) == $subnet;
+    }
+
+    /**
+     * Returns TRUE if the current request is coming from a webhook IP address listed by GitHub's /meta API endpoint
+     *
+     * @throws \Exception
+     * @returns bool
+     */
+    public static function isGitHub()
+    {
+        // Get IP address ranges from GitHub
+        $githubMetaUrl = 'https://api.github.com/meta';
+        $ch = curl_init($githubMetaUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $curlResult = curl_exec($ch);
+        curl_close($ch);
+        $ipAddresses = json_decode($curlResult);
+        if (!isset($ipAddresses['hooks'])) {
+            throw new Exception('Unable to retrieve GitHub webhook IP address ranges');
+        }
+
+        // Confirm that this request is coming from one of those ranges
+        $ip = $_SERVER['REMOTE_ADDR'];
+        foreach ($ipAddresses['hooks'] as $range) {
+            if (self::cidrMatch($ip, $range)) {
                 return true;
             }
         }
