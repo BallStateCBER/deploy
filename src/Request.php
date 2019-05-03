@@ -120,7 +120,6 @@ class Request
      * Returns whether or not the current request was made by an authorized IP address
      *
      * @return bool
-     * @throws Exception
      */
     public static function isAuthorized()
     {
@@ -130,10 +129,6 @@ class Request
             if (strpos($ip, $allowedIp) === 0) {
                 return true;
             }
-        }
-
-        if (self::isGitHub()) {
-            return true;
         }
 
         return false;
