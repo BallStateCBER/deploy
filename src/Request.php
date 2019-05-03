@@ -173,13 +173,13 @@ class Request
         $curlResult = curl_exec($ch);
         curl_close($ch);
         $ipAddresses = json_decode($curlResult);
-        if (!isset($ipAddresses['hooks'])) {
+        if (!isset($ipAddresses->hooks)) {
             throw new Exception('Unable to retrieve GitHub webhook IP address ranges');
         }
 
         // Confirm that this request is coming from one of those ranges
         $ip = $_SERVER['REMOTE_ADDR'];
-        foreach ($ipAddresses['hooks'] as $range) {
+        foreach ($ipAddresses->hooks as $range) {
             if (self::cidrMatch($ip, $range)) {
                 return true;
             }
