@@ -35,6 +35,16 @@ return [
             'url' => 'https://cri.cberdata.org'
         ]
     ],
+    'community-asset-inventory-cakephp3' => [
+        'development' => [
+            'dir' => 'cair_staging',
+            'url' => 'https://staging.asset.cberdata.org'
+        ],
+        'master' => [
+            'dir' => 'cair',
+            'url' => 'https://asset.cberdata.org'
+        ]
+    ],
     'datacenter-home' => [
         'development' => [
             'dir' => 'data_center_home_staging',
