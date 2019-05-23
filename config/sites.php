@@ -38,11 +38,11 @@ return [
     'community-asset-inventory-cakephp3' => [
         'development' => [
             'dir' => 'cair_staging',
-            'url' => 'https://staging.asset.cberdata.org'
+            'url' => 'https://staging.cair.cberdata.org'
         ],
         'master' => [
             'dir' => 'cair',
-            'url' => 'https://asset.cberdata.org'
+            'url' => 'https://cair.cberdata.org'
         ]
     ],
     'datacenter-home' => [
