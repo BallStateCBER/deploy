@@ -101,6 +101,11 @@ class Deploy
         $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $siteName . '#' . $log->entryId;
         $slack->addLine('*Log:* ' . $logUrl);
 
+        // Display link to view updated site
+        if (isset($site[$branch]['url'])) {
+            $slack->addLine('*Load updated site:* ' . $site[$branch]['url']);
+        }
+
         // Write to log
         $log->addLine('');
         $log->write();
