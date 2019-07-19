@@ -21,7 +21,7 @@ class Request
      *
      * @return string|bool
      */
-    public static function getSiteName()
+    public static function getRepoName()
     {
         if (isset($_POST['payload'])) {
             $payload = json_decode($_POST['payload']);
@@ -56,8 +56,8 @@ class Request
      */
     public static function getBranch()
     {
-        $siteName = Request::getSiteName();
-        $site = Site::getSite($siteName);
+        $repoName = Request::getRepoName();
+        $site = Site::getSite($repoName);
         $availableBranches = array_keys($site);
         if (empty($_POST)) {
             if (strpos($_GET['path'], '/') === false) {
@@ -84,14 +84,14 @@ class Request
     public static function getDeployTrigger()
     {
         $branch = Request::getBranch();
-        $siteName = Request::getSiteName();
+        $repoName = Request::getRepoName();
 
         if (empty($_POST)) {
             $ip = Request::getIpAddress();
             $allowedIps = include dirname(dirname(__FILE__)) . '/config/allowed_ip_addresses.php';
             $requesterName = array_search($ip, $allowedIps);
 
-            return "Deploy triggered manually by $requesterName for $branch branch of $siteName";
+            return "Deploy triggered manually by $requesterName for $branch branch of $repoName";
         }
 
         $payload = Request::getPayload();
@@ -99,7 +99,7 @@ class Request
         $beforeSha = substr($payload->before, 0, 7);
         $afterSha = substr($payload->after, 0, 7);
 
-        return "Push from $pusher updated head SHA of $branch branch of $siteName from $beforeSha to $afterSha";
+        return "Push from $pusher updated head SHA of $branch branch of $repoName from $beforeSha to $afterSha";
     }
 
     /**

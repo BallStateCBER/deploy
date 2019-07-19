@@ -37,18 +37,18 @@ class Deploy
         }
 
         // Retrieve and validate site
-        $siteName = Request::getSiteName();
-        if (!$siteName) {
+        $repoName = Request::getRepoName();
+        if (!$repoName) {
             header('HTTP/1.1 404 Not Found');
-            echo 'No valid site name provided';
+            echo 'No valid repo name provided';
             exit;
         }
-        if (!Site::isValid($siteName)) {
+        if (!Site::isValid($repoName)) {
             header('HTTP/1.1 404 Not Found');
-            echo 'Unrecognized site name: ' . $siteName;
+            echo 'Unrecognized repo name: ' . $repoName;
             exit;
         }
-        $site = Site::getSite($siteName);
+        $site = Site::getSite($repoName);
 
         // Determine and validate branch
         $branch = Request::getBranch();
@@ -98,7 +98,7 @@ class Deploy
 
             $slack->addAbridged($command, $results);
         }
-        $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $siteName . '#' . $log->entryId;
+        $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $repoName . '#' . $log->entryId;
         $slack->addLine('*Log:* ' . $logUrl);
 
         // Display link to view updated site

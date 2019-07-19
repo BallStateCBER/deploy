@@ -4,29 +4,29 @@ namespace App;
 class Site
 {
     /**
-     * Returns whether or not $siteName is listed in sites.php
+     * Returns whether or not $repoName is listed in sites.php
      *
-     * @param string $siteName Name of GitHub repository
+     * @param string $repoName Name of GitHub repository
      * @return bool
      */
-    public static function isValid($siteName)
+    public static function isValid($repoName)
     {
         $sites = include dirname(dirname(__FILE__)) . '/config/sites.php';
 
-        return isset($sites[$siteName]);
+        return isset($sites[$repoName]);
     }
 
     /**
      * Returns the array of information stored in /config/sites.php about the specified site
      *
-     * @param string $siteName Name of GitHub repository
+     * @param string $repoName Name of GitHub repository
      * @return array
      */
-    public static function getSite($siteName)
+    public static function getSite($repoName)
     {
         $sites = self::getSites();
 
-        return $sites[$siteName];
+        return $sites[$repoName];
     }
 
     /**

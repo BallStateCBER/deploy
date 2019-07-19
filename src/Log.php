@@ -34,8 +34,8 @@ class Log
     public function write()
     {
         $this->content .= '<hr />';
-        $siteName = Request::getSiteName();
-        $filename = dirname(dirname(__FILE__)) . "/logs/$siteName.html";
+        $repoName = Request::getRepoName();
+        $filename = dirname(dirname(__FILE__)) . "/logs/$repoName.html";
         file_put_contents($filename, $this->content, FILE_APPEND);
     }
 }

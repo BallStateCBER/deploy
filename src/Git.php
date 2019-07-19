@@ -4,20 +4,20 @@ namespace App;
 class Git
 {
     /**
-     * @param $siteName
+     * @param $repoName
      * @param $branch
-     * @throws \Exception
      * @return bool
+     *@throws \Exception
      */
-    public static function canPull($siteName, $branch)
+    public static function canPull($repoName, $branch)
     {
-        if (!Site::isValid($siteName)) {
-            throw new \Exception('Unrecognized site name: ' . $siteName);
+        if (!Site::isValid($repoName)) {
+            throw new \Exception('Unrecognized repo: ' . $repoName);
         }
 
-        $site = Site::getSite($siteName);
+        $site = Site::getSite($repoName);
         if (!Site::isValidBranch($branch, $site)) {
-            throw new \Exception("$branch branch does not exist for $siteName repo");
+            throw new \Exception("$branch branch does not exist for $repoName repo");
         }
 
         // Make sure site directory exists
