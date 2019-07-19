@@ -32,8 +32,10 @@ class Deploy
         $this->handleGithubPings();
 
         $this->repoName = $this->getRepoName();
-        $this->site = Site::getSite($this->repoName);
         $this->branch = Request::getBranch();
+        $this->handleDependencyUpdate();
+
+        $this->site = Site::getSite($this->repoName);
         $this->validateBranch();
 
         $this->initializeLogging();
@@ -220,5 +222,49 @@ class Deploy
 
         $this->addSiteLinkToSlack();
         $this->sendSlackOutput();
+    }
+
+    /**
+     * Handles a dependency being updated and sites that use it being updated, then halts execution
+     *
+     * @return void
+     */
+    private function handleDependencyUpdate()
+    {
+        $dependencies = include dirname(dirname(__FILE__)) . '/config/dependencies.php';
+
+        if (!isset($dependencies[$this->repoName])) {
+            return;
+        }
+
+        Dependency::validateBranch($this->branch);
+
+        $dependency = $dependencies[$this->repoName];
+        $packageName = $dependency['package'];
+        $this->initializeLogging();
+        foreach ($dependency['directories'] as $directory) {
+            Dependency::openSiteDir($directory);
+
+            $command = "composer update $packageName";
+            $results = shell_exec("$command 2>&1");
+            $siteDir = Dependency::getFullSiteDir($directory);
+
+            $this->log->addLine("<strong>\$ cd $siteDir</strong>");
+            $this->log->addLine("<strong>\$ $command</strong>");
+            $this->log->addLine(trim($results));
+            $this->log->addLine('');
+
+            $this->screenOutput->add('$ ', '#6BE234');
+            $this->screenOutput->add("cd $siteDir\n", '#729FCF');
+            $this->screenOutput->add("$command\n", '#729FCF');
+            $this->screenOutput->add(htmlentities(trim($results)) . "\n\n");
+
+            $this->slack->addAbridged($command, $results);
+        }
+
+        $this->finishLogging();
+
+        // Halt execution so this request isn't processed as a site repo getting updated
+        exit;
     }
 }
