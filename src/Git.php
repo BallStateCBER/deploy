@@ -1,23 +1,27 @@
 <?php
 namespace App;
 
+use Exception;
+
 class Git
 {
     /**
-     * @param $repoName
-     * @param $branch
+     * Returns TRUE if the site can pull changes from GitHub, or FALSE if modified files prevent this
+     *
+     * @param string $repoName Repository name
+     * @param string $branch Branch name
      * @return bool
-     *@throws \Exception
+     * @throws Exception
      */
     public static function canPull($repoName, $branch)
     {
         if (!Site::isValid($repoName)) {
-            throw new \Exception('Unrecognized repo: ' . $repoName);
+            throw new Exception('Unrecognized repo: ' . $repoName);
         }
 
         $site = Site::getSite($repoName);
         if (!Site::isValidBranch($branch, $site)) {
-            throw new \Exception("$branch branch does not exist for $repoName repo");
+            throw new Exception("$branch branch does not exist for $repoName repo");
         }
 
         // Make sure site directory exists
