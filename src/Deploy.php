@@ -3,40 +3,88 @@ namespace App;
 
 use Exception;
 
+/**
+ * Class Deploy
+ *
+ * @package App
+ * @property array $site
+ * @property Log $log
+ * @property ScreenOutput $screenOutput
+ * @property Slack $slack
+ * @property string $branch
+ * @property string $repoName
+ */
 class Deploy
 {
-    public $triggerMsg;
+    public $branch;
+    public $log;
+    public $repoName;
     public $screenOutput;
+    public $site;
+    public $slack;
 
     /**
      * Deploy constructor
      */
     public function __construct()
     {
-        $appDir = dirname(dirname(__FILE__));
+        $this->validateIpAddress();
+        $this->handleGithubPings();
 
-        // Forbid unknown IP addresses
-        if (!Request::isAuthorized()) {
-            try {
-                if (!Request::isGitHub()) {
-                    header('HTTP/1.1 403 Forbidden');
-                    echo 'Sorry, your IP address (' . Request::getIpAddress() . ') isn\'t authorized. 🙁';
-                    exit;
-                }
-            } catch (Exception $e) {
-                header('HTTP/1.1 500 Internal Server Error');
-                echo $e->getMessage();
-                exit;
-            }
+        $this->repoName = $this->getRepoName();
+        $this->site = Site::getSite($this->repoName);
+        $this->branch = Request::getBranch();
+        $this->validateBranch();
+
+        $this->initializeLogging();
+        $this->runCommands();
+        $this->finishLogging();
+    }
+
+    /**
+     * Forbids unknown IP addresses
+     *
+     * @return void
+     */
+    private function validateIpAddress()
+    {
+        if (Request::isAuthorized()) {
+            return;
         }
 
-        // Handle GitHub pings
+        try {
+            if (!Request::isGitHub()) {
+                header('HTTP/1.1 403 Forbidden');
+                echo 'Sorry, your IP address (' . Request::getIpAddress() . ') isn\'t authorized. 🙁';
+                exit;
+            }
+        } catch (Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+            echo $e->getMessage();
+            exit;
+        }
+    }
+
+    /**
+     * Replies and aborts execution if this request is a Github ping
+     *
+     * @return void
+     */
+    private function handleGithubPings()
+    {
         if (Request::isGithubPing()) {
             echo 'Ping received!';
             exit;
         }
+    }
 
-        // Retrieve and validate site
+    /**
+     * Retrieves this request's valid repository name or throws an error if it's missing or invalid
+     *
+     * @return string
+     */
+    private function getRepoName()
+    {
         $repoName = Request::getRepoName();
         if (!$repoName) {
             header('HTTP/1.1 404 Not Found');
@@ -48,74 +96,129 @@ class Deploy
             echo 'Unrecognized repo name: ' . $repoName;
             exit;
         }
-        $site = Site::getSite($repoName);
 
-        // Determine and validate branch
-        $branch = Request::getBranch();
-        if (!Site::isValidBranch($branch, $site)) {
-            echo "$branch branch can't be auto-deployed. ";
-            echo "Branches that can be auto-deployed: " . implode(', ', Site::getAvailableBranches($site));
+        return $repoName;
+    }
+
+    /**
+     * Halts execution if the current branch can't be auto-deployed
+     *
+     * @return void
+     */
+    private function validateBranch()
+    {
+        if (!Site::isValidBranch($this->branch, $this->site)) {
+            echo "$this->branch branch can't be auto-deployed. ";
+            echo "Branches that can be auto-deployed: " . implode(', ', Site::getAvailableBranches($this->site));
             exit;
         }
+    }
 
-        // Create a message explaining what triggered this deploy
-        $this->triggerMsg = Request::getDeployTrigger();
-
-        // Initialize various output
-        $log = new Log();
-        $log->addLine($this->triggerMsg);
-        $log->addLine('');
-        $this->screenOutput = new ScreenOutput();
-        $slack = new Slack();
-        $slack->addTriggerMsg($this->triggerMsg);
-
-        // Make sure site directory exists
+    /**
+     * Changes the current working directory to the appropriate website
+     *
+     * @return void
+     */
+    private function openSiteDir()
+    {
+        $appDir = dirname(dirname(__FILE__));
         $sitesRoot = dirname($appDir);
-        $siteDir = $sitesRoot . '/' . $site[$branch]['dir'];
+        $siteDir = $sitesRoot . '/' . $this->site[$this->branch]['dir'];
         if (!file_exists($siteDir)) {
             echo "$siteDir not found";
             exit;
         }
 
-        // Change working directory to appropriate website
         chdir($siteDir);
+    }
 
-        // Run commands
+    /**
+     * Runs all of the commands for deploying an update
+     *
+     * @return void
+     */
+    private function runCommands()
+    {
+        $appDir = dirname(dirname(__FILE__));
+        $this->openSiteDir();
         $commands = include $appDir . '/config/commands.php';
-        if (isset($site['commands'])) {
-            $commands = array_merge($commands, $site['commands']);
+        if (isset($this->site['commands'])) {
+            $commands = array_merge($commands, $this->site['commands']);
         }
         foreach ($commands as $command) {
             $results = shell_exec("$command 2>&1");
 
-            $log->addLine("<strong>\$ $command</strong>");
-            $log->addLine(trim($results));
-            $log->addLine('');
+            $this->log->addLine("<strong>\$ $command</strong>");
+            $this->log->addLine(trim($results));
+            $this->log->addLine('');
 
             $this->screenOutput->add('$ ', '#6BE234');
             $this->screenOutput->add($command . "\n", '#729FCF');
             $this->screenOutput->add(htmlentities(trim($results)) . "\n\n");
 
-            $slack->addAbridged($command, $results);
+            $this->slack->addAbridged($command, $results);
         }
-        $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $repoName . '#' . $log->entryId;
-        $slack->addLine('*Log:* ' . $logUrl);
+        $logUrl = 'http://deploy.cberdata.org/log.php?site=' . $this->repoName . '#' . $this->log->entryId;
+        $this->slack->addLine('*Log:* ' . $logUrl);
+    }
 
-        // Display link to view updated site
-        if (isset($site[$branch]['url'])) {
-            $slack->addLine('*Load updated site:* ' . $site[$branch]['url']);
-        }
+    /**
+     * Initializes output for the log, slack, and screen, and logs the trigger message
+     *
+     * @return void
+     */
+    private function initializeLogging()
+    {
+        $triggerMsg = Request::getDeployTrigger();
 
-        // Write to log
-        $log->addLine('');
-        $log->write();
+        $this->log = new Log();
+        $this->log->addLine($triggerMsg);
+        $this->log->addLine('');
 
-        // Send a message to Slack
-        if ($slack->send()) {
-            $this->screenOutput->add("Sent message to Slack");
+        $this->screenOutput = new ScreenOutput();
+
+        $this->slack = new Slack();
+        $this->slack->addTriggerMsg($triggerMsg);
+    }
+
+    /**
+     * Sends a message to Slack or outputs error information
+     *
+     * @return void
+     */
+    private function sendSlackOutput()
+    {
+        if ($this->slack->send()) {
+            $this->screenOutput->add('Sent message to Slack');
         } else {
             $this->screenOutput->add('Error sending message to Slack: ');
-            $this->screenOutput->add($slack->curlResult, 'red');
+            $this->screenOutput->add($this->slack->curlResult, 'red');
         }
+    }
+
+    /**
+     * Adds a link to view the updated site to slack
+     *
+     * @return void
+     */
+    private function addSiteLinkToSlack()
+    {
+        if (isset($this->site[$this->branch]['url'])) {
+            $this->slack->addLine('*Load updated site:* ' . $this->site[$this->branch]['url']);
+        }
+    }
+
+    /**
+     * Writes to the log and sends slack message
+     *
+     * @return void
+     */
+    private function finishLogging()
+    {
+        $this->log->addLine('');
+        $this->log->write();
+
+        $this->addSiteLinkToSlack();
+        $this->sendSlackOutput();
     }
 }
