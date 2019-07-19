@@ -30,6 +30,12 @@ class Deploy
             }
         }
 
+        // Handle GitHub pings
+        if (Request::isGithubPing()) {
+            echo 'Ping received!';
+            exit;
+        }
+
         // Retrieve and validate site
         $siteName = Request::getSiteName();
         if (!$siteName) {
@@ -43,12 +49,6 @@ class Deploy
             exit;
         }
         $site = Site::getSite($siteName);
-
-        // Handle GitHub pings
-        if (Request::isGithubPing()) {
-            echo 'Ping received!';
-            exit;
-        }
 
         // Determine and validate branch
         $branch = Request::getBranch();
