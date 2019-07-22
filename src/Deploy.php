@@ -33,7 +33,6 @@ class Deploy
 
         $this->repoName = $this->getRepoName();
         $this->branch = Request::getBranch();
-        $this->handleDependencyUpdate();
 
         $this->site = Site::getSite($this->repoName);
         $this->validateBranch();
