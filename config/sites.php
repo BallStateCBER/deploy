@@ -117,6 +117,16 @@ return [
             'url' => 'https://tax-comparison.cberdata.org'
         ]
     ],
+    'vore-arts-fund' => [
+        'development' => [
+            'dir' => 'vore_staging',
+            'url' => 'https://staging.voreartsfund.org'
+        ],
+        'master' => [
+            'dir' => 'vore',
+            'url' => 'https://voreartsfund.org'
+        ]
+    ],
     'whyarewehere' => [
         'development' => [
             'dir' => 'student_work_staging',
