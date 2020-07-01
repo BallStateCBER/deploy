@@ -9,5 +9,5 @@ return [
     'git pull',
     'git status',
     "$composer self-update",
-    "$composer install"
+    "$composer install --no-dev"
 ];
