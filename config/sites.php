@@ -71,16 +71,6 @@ return [
             'url' => 'https://muncieevents.com'
         ]
     ],
-    'muncie-events3' => [
-        'development' => [
-            'dir' => 'muncie_events_cakephp3_staging',
-            'url' => 'https://staging.cake3.muncieevents.com'
-        ],
-        'master' => [
-            'dir' => 'muncie_events_cakephp3',
-            'url' => 'https://cake3.muncieevents.com'
-        ]
-    ],
     'muncie-events-api' => [
         'development' => [
             'dir' => 'muncie_events_api_staging',
