@@ -38,6 +38,7 @@ class Deploy
         $this->validateBranch();
 
         $this->initializeLogging();
+        $this->setEnvVars();
         $this->runCommands();
         $this->finishLogging();
     }
@@ -265,5 +266,15 @@ class Deploy
 
         // Halt execution so this request isn't processed as a site repo getting updated
         exit;
+    }
+
+    /**
+     * Sets environment variables
+     *
+     * @return void
+     */
+    private function setEnvVars()
+    {
+        putenv('COMPOSER_HOME="$HOME/.config/composer"');
     }
 }
