@@ -275,6 +275,6 @@ class Deploy
      */
     private function setEnvVars()
     {
-        putenv('COMPOSER_HOME="$HOME/.config/composer"');
+        putenv('COMPOSER_HOME=/home/okbvtfr/.composer');
     }
 }
