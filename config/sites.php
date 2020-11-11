@@ -25,16 +25,6 @@ return [
             'url' => 'https://cake3.commentaries.cberdata.org'
         ]
     ],
-    'cri' => [
-        'development' => [
-            'dir' => 'cri_staging',
-            'url' => 'https://staging.cri.cberdata.org'
-        ],
-        'master' => [
-            'dir' => 'cri',
-            'url' => 'https://cri.cberdata.org'
-        ]
-    ],
     'community-asset-inventory-cakephp3' => [
         'development' => [
             'dir' => 'cair_staging',
@@ -99,16 +89,6 @@ return [
         'master' => [
             'dir' => 'school',
             'url' => 'https://school.cberdata.org'
-        ]
-    ],
-    'tax-calculator' => [
-        'development' => [
-            'dir' => 'tax_calculator_staging',
-            'url' => 'https://staging.tax-comparison.cberdata.org'
-        ],
-        'master' => [
-            'dir' => 'tax_calculator',
-            'url' => 'https://tax-comparison.cberdata.org'
         ]
     ],
     'vore-arts-fund' => [
