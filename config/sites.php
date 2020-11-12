@@ -51,6 +51,12 @@ return [
             'url' => 'https://deploy.cberdata.org'
         ]
     ],
+    'economic-indicators-cakephp4' => [
+        'master' => [
+            'dir' => 'indicators',
+            'url' => 'https://indicators4.cberdata.org',
+        ],
+    ],
     'muncie-events' => [
         'development' => [
             'dir' => 'muncie_events_staging',
