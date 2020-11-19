@@ -81,16 +81,6 @@ return [
             'url' => 'https://combined.muncieevents.com',
         ],
     ],
-    'projects-cakephp3' => [
-        'development' => [
-            'dir' => 'projects_staging',
-            'url' => 'https://staging.projects3.cberdata.org'
-        ],
-        'master' => [
-            'dir' => 'projects',
-            'url' => 'https://projects.cberdata.org'
-        ]
-    ],
     'school-rankings' => [
         'master' => [
             'dir' => 'school',
