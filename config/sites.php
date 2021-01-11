@@ -57,28 +57,14 @@ return [
             'url' => 'https://indicators4.cberdata.org',
         ],
     ],
-    'muncie-events' => [
+    'muncie-events-api' => [
         'development' => [
             'dir' => 'muncie_events_staging',
-            'url' => 'https://staging.muncieevents.com'
+            'url' => 'https://staging.muncieevents.com',
         ],
         'master' => [
             'dir' => 'muncie_events',
-            'url' => 'https://muncieevents.com'
-        ]
-    ],
-    'muncie-events-api' => [
-        'development' => [
-            'dir' => 'muncie_events_api_staging',
-            'url' => 'https://staging.api.muncieevents.com',
-        ],
-        'master' => [
-            'dir' => 'muncie_events_api',
-            'url' => 'https://api.muncieevents.com',
-        ],
-        'with-main-site' => [
-            'dir' => 'muncie_events_combined',
-            'url' => 'https://combined.muncieevents.com',
+            'url' => 'https://muncieevents.com',
         ],
     ],
     'school-rankings' => [
