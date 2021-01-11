@@ -8,7 +8,7 @@ websites developed by the Ball State University Center for Business and Economic
 - Clone site twice (production and staging)  
 	`git clone -b master (repo) (dirname)`  
 	`git clone -b development (repo) (dirname_staging)`
-- Run `composer install` in both directories
+- Run `composer install --no-dev` in both directories
 - Run `npm install` in both directories (if needed)  
   **Note:** If errors are generated due to reaching memory limit, try running this command as `root` user and then running
   `chown -R okbvtfr:okbvtfr node_modules` to give ownership back to `okbvtfr`
