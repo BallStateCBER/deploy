@@ -9,5 +9,6 @@ return [
     'git pull',
     'git status',
     "$composer self-update",
-    "$composer install --no-dev"
+    "$composer install --no-dev",
+    "bin/cake migrations migrate",
 ];
