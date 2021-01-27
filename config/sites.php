@@ -75,6 +75,17 @@ return [
         ],
         'commands' => [$cake3CacheClear],
     ],
+    'projects-cakephp4' => [
+        'development' => [
+            'dir' => 'projects_staging',
+            'url' => 'https://staging.projects.cberdata.org',
+        ],
+        'master' => [
+            'dir' => 'projects',
+            'url' => 'https://beta.projects.cberdata.org',
+        ],
+        'commands' => [$cake4CacheClear],
+    ],
     'school-rankings' => [
         'master' => [
             'dir' => 'school',
