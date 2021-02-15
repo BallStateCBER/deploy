@@ -41,7 +41,7 @@ return [
         'commands' => [$cake3CacheClear],
     ],
     'datacenter-home' => [
-        'development' => [
+        'cake4' => [
             'dir' => 'data_center_home_staging',
             'url' => 'https://staging.home.cberdata.org'
         ],
