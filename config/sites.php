@@ -18,8 +18,8 @@
  * ]
  */
 
-$cake3CacheClear = 'bin/cake orm_cache clear';
-$cake4CacheClear = 'bin/cake schema_cache build --connection default';
+$cake3CacheClear = 'php bin/cake.php orm_cache clear';
+$cake4CacheClear = 'php bin/cake.php schema_cache build --connection default';
 
 return [
     'commentaries-cake3' => [

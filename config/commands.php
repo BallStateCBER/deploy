@@ -10,5 +10,5 @@ return [
     'git status',
     "$composer self-update",
     "$composer install --no-dev",
-    "bin/cake migrations migrate",
+    "php bin/cake.php migrations migrate",
 ];
