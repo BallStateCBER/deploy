@@ -20,6 +20,7 @@
 
 $cake3CacheClear = 'php bin/cake.php orm_cache clear';
 $cake4CacheClear = 'php bin/cake.php schema_cache build --connection default';
+$migrate = 'php bin/cake.php migrations migrate';
 
 return [
     'commentaries-cake3' => [
@@ -27,7 +28,7 @@ return [
             'dir' => 'commentaries',
             'url' => 'https://cake3.commentaries.cberdata.org'
         ],
-        'commands' => [$cake3CacheClear],
+        'commands' => [$cake3CacheClear, $migrate],
     ],
     'community-asset-inventory-cakephp3' => [
         'development' => [
@@ -38,7 +39,7 @@ return [
             'dir' => 'cair',
             'url' => 'https://cair.cberdata.org'
         ],
-        'commands' => [$cake3CacheClear],
+        'commands' => [$cake3CacheClear, $migrate],
     ],
     'datacenter-home' => [
         'master' => [
@@ -69,7 +70,7 @@ return [
             'dir' => 'muncie_events',
             'url' => 'https://muncieevents.com',
         ],
-        'commands' => [$cake3CacheClear],
+        'commands' => [$cake3CacheClear, $migrate],
     ],
     'projects-cakephp4' => [
         'development' => [
@@ -80,14 +81,14 @@ return [
             'dir' => 'projects',
             'url' => 'https://beta.projects.cberdata.org',
         ],
-        'commands' => [$cake4CacheClear],
+        'commands' => [$cake4CacheClear, $migrate],
     ],
     'school-rankings' => [
         'master' => [
             'dir' => 'school',
             'url' => 'https://school.cberdata.org'
         ],
-        'commands' => [$cake3CacheClear],
+        'commands' => [$cake3CacheClear, $migrate],
     ],
     'vore-arts-fund' => [
         'development' => [
@@ -98,7 +99,7 @@ return [
             'dir' => 'vore',
             'url' => 'https://voreartsfund.org'
         ],
-        'commands' => [$cake4CacheClear],
+        'commands' => [$cake4CacheClear, $migrate],
     ],
     'whyarewehere' => [
         'development' => [
@@ -109,6 +110,6 @@ return [
             'dir' => 'student_work',
             'url' => 'https://studentwork.cberdata.org'
         ],
-        'commands' => [$cake3CacheClear],
+        'commands' => [$cake3CacheClear, $migrate],
     ]
 ];
