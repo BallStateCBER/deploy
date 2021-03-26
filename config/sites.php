@@ -26,18 +26,21 @@ return [
     'commentaries-cake3' => [
         'master' => [
             'dir' => 'commentaries',
-            'url' => 'https://cake3.commentaries.cberdata.org'
+            'url' => 'https://cake3.commentaries.cberdata.org',
+            'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
     ],
     'community-asset-inventory-cakephp3' => [
         'development' => [
             'dir' => 'cair_staging',
-            'url' => 'https://staging.cair.cberdata.org'
+            'url' => 'https://staging.cair.cberdata.org',
+            'php' => 7,
         ],
         'master' => [
             'dir' => 'cair',
-            'url' => 'https://cair.cberdata.org'
+            'url' => 'https://cair.cberdata.org',
+            'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
     ],
@@ -51,7 +54,8 @@ return [
     'deploy' => [
         'master' => [
             'dir' => 'deploy',
-            'url' => 'https://deploy.cberdata.org'
+            'url' => 'https://deploy.cberdata.org',
+            'php' => 7,
         ]
     ],
     'economic-indicators-cakephp4' => [
@@ -65,10 +69,12 @@ return [
         'development' => [
             'dir' => 'muncie_events_staging',
             'url' => 'https://staging.muncieevents.com',
+            'php' => 7,
         ],
         'master' => [
             'dir' => 'muncie_events',
             'url' => 'https://muncieevents.com',
+            'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
     ],
@@ -79,36 +85,41 @@ return [
         ],
         'master' => [
             'dir' => 'projects',
-            'url' => 'https://beta.projects.cberdata.org',
+            'url' => 'https://projects.cberdata.org',
         ],
         'commands' => [$cake4CacheClear, $migrate],
     ],
     'school-rankings' => [
         'master' => [
             'dir' => 'school',
-            'url' => 'https://school.cberdata.org'
+            'url' => 'https://school.cberdata.org',
+            'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
     ],
     'vore-arts-fund' => [
         'development' => [
             'dir' => 'vore_staging',
-            'url' => 'https://staging.voreartsfund.org'
+            'url' => 'https://staging.voreartsfund.org',
+            'php' => 7,
         ],
         'master' => [
             'dir' => 'vore',
-            'url' => 'https://voreartsfund.org'
+            'url' => 'https://voreartsfund.org',
+            'php' => 7,
         ],
         'commands' => [$cake4CacheClear, $migrate],
     ],
     'whyarewehere' => [
         'development' => [
             'dir' => 'student_work_staging',
-            'url' => 'https://staging.studentwork.cberdata.org'
+            'url' => 'https://staging.studentwork.cberdata.org',
+            'php' => 7,
         ],
         'master' => [
             'dir' => 'student_work',
-            'url' => 'https://studentwork.cberdata.org'
+            'url' => 'https://studentwork.cberdata.org',
+            'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
     ]

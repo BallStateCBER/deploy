@@ -141,6 +141,7 @@ class Deploy
      */
     private function runCommands()
     {
+        $phpVersion = $this->getPhpVersion();
         $appDir = dirname(dirname(__FILE__));
         $this->openSiteDir();
         $commands = include $appDir . '/config/commands.php';
@@ -148,6 +149,7 @@ class Deploy
             $commands = array_merge($commands, $this->site['commands']);
         }
         foreach ($commands as $command) {
+            $command = $this->adaptCommandToPhpVersion($command, $phpVersion);
             $results = shell_exec("$command 2>&1");
 
             $this->log->addLine("<strong>\$ $command</strong>");
@@ -276,5 +278,35 @@ class Deploy
     private function setEnvVars()
     {
         putenv('COMPOSER_HOME=/home/okbvtfr/.composer');
+    }
+
+    /**
+     * Returns the major PHP version associated with the current site/branch
+     *
+     * @return int
+     */
+    private function getPhpVersion(): int
+    {
+        if ($this->site[$this->branch]['php']) {
+            return (int)$this->site[$this->branch]['php'];
+        }
+
+        return 8;
+    }
+
+    /**
+     * Temporarily changes the path to PHP for this command, if required
+     *
+     * @param string $command Command
+     * @param int $phpVersion PHP major version
+     * @return string
+     */
+    private function adaptCommandToPhpVersion(string $command, int $phpVersion): string
+    {
+        if ($phpVersion == 7) {
+            return 'env PATH="/opt/cpanel/ea-php74/root/usr/bin:$PATH" ' . $command;
+        }
+
+        return $command;
     }
 }
