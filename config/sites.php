@@ -63,6 +63,10 @@ return [
             'dir' => 'indicators',
             'url' => 'https://indicators4.cberdata.org',
         ],
+        'development' => [
+            'dir' => 'indicators_staging',
+            'url' => 'https://staging.indicators4.cberdata.org',
+        ],
         'commands' => [$cake4CacheClear],
     ],
     'muncie-events-api' => [
