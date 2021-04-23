@@ -33,7 +33,8 @@
                                     echo "<a href=\"/$site/$branch\">$branch</a>";
                                 } else {
                                     echo '<span class="pull-unavailable" ' .
-                                        'title="Cannot pull: Modified files or dir missing">' . $branch . ' 🚫</span>';
+                                        'title="Modified files or dir missing; may not be able to pull">' . $branch .
+                                        ' ⚠</span>';
                                 }
                             } catch (Exception $e) {
                                 echo '<span class="pull-unavailable" ' .
