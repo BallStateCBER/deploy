@@ -61,11 +61,11 @@ return [
     'economic-indicators-cakephp4' => [
         'master' => [
             'dir' => 'indicators',
-            'url' => 'https://indicators4.cberdata.org',
+            'url' => 'https://indicators.cberdata.org',
         ],
         'development' => [
             'dir' => 'indicators_staging',
-            'url' => 'https://staging.indicators4.cberdata.org',
+            'url' => 'https://staging.indicators.cberdata.org',
         ],
         'commands' => [$cake4CacheClear],
     ],
