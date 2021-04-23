@@ -25,6 +25,9 @@
                 <td>
                     <?php foreach ($branches as $branch => $info): ?>
                         <?php
+                            if ($branch == 'commands') {
+                                continue;
+                            }
                             try {
                                 if (\App\Git::canPull($site, $branch)) {
                                     echo "<a href=\"/$site/$branch\">$branch</a>";
