@@ -67,7 +67,7 @@ return [
             'dir' => 'indicators_staging',
             'url' => 'https://staging.indicators.cberdata.org',
         ],
-        'commands' => [$cake4CacheClear],
+        'commands' => [$cake4CacheClear, $migrate],
     ],
     'muncie-events-api' => [
         'development' => [
