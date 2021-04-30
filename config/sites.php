@@ -69,19 +69,6 @@ return [
         ],
         'commands' => [$cake4CacheClear, $migrate],
     ],
-    'muncie-events-api' => [
-        'development' => [
-            'dir' => 'muncie_events_staging',
-            'url' => 'https://staging.muncieevents.com',
-            'php' => 7,
-        ],
-        'master' => [
-            'dir' => 'muncie_events',
-            'url' => 'https://muncieevents.com',
-            'php' => 7,
-        ],
-        'commands' => [$cake3CacheClear, $migrate],
-    ],
     'projects-cakephp4' => [
         'development' => [
             'dir' => 'projects_staging',
@@ -100,19 +87,6 @@ return [
             'php' => 7,
         ],
         'commands' => [$cake3CacheClear, $migrate],
-    ],
-    'vore-arts-fund' => [
-        'development' => [
-            'dir' => 'vore_staging',
-            'url' => 'https://staging.voreartsfund.org',
-            'php' => 7,
-        ],
-        'master' => [
-            'dir' => 'vore',
-            'url' => 'https://voreartsfund.org',
-            'php' => 7,
-        ],
-        'commands' => [$cake4CacheClear, $migrate],
     ],
     'whyarewehere' => [
         'development' => [
